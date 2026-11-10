@@ -1,0 +1,6 @@
+{
+  "name": "Royal Global Freight",
+  "description": "Royal Global Freight provides international freight forwarding, ocean freight, air freight, road transportation and integrated logistics coordination solutions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
