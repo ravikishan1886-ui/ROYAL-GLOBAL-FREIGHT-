@@ -327,6 +327,40 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
       { name: 'Home', path: '/' },
       { name: '404', path: '/404' }
     ]
+  },
+  'privacy-policy': {
+    title: 'Privacy Policy | Royal Global Freight',
+    description: 'Privacy Policy of Royal Global Freight. Learn how we handle, store, and protect commercial shipping documentation and client data.',
+    canonicalPath: '/privacy-policy',
+    h1: 'Privacy & Data Protection Policy',
+    keywords: [
+      'Royal Global Freight Privacy Policy',
+      'Freight Data Protection',
+      'Shipping Document Privacy'
+    ],
+    ogType: 'website',
+    image: `${CANONICAL_ORIGIN}/assets/aistudio/file_000000002b3c8208aa2c073557e13cb3_eeff9ba8.png`,
+    breadcrumbs: [
+      { name: 'Home', path: '/' },
+      { name: 'Privacy Policy', path: '/privacy-policy' }
+    ]
+  },
+  'terms-and-conditions': {
+    title: 'Terms & Conditions | Royal Global Freight',
+    description: 'Standard Terms & Conditions of Freight Service for Royal Global Freight. Detailed forwarding, carriage coordination, and liability conditions.',
+    canonicalPath: '/terms-and-conditions',
+    h1: 'Standard Terms & Conditions of Freight Service',
+    keywords: [
+      'Royal Global Freight Terms and Conditions',
+      'Freight Forwarding Contract Terms',
+      'Standard Trading Conditions'
+    ],
+    ogType: 'website',
+    image: `${CANONICAL_ORIGIN}/assets/aistudio/file_000000002b3c8208aa2c073557e13cb3_eeff9ba8.png`,
+    breadcrumbs: [
+      { name: 'Home', path: '/' },
+      { name: 'Terms & Conditions', path: '/terms-and-conditions' }
+    ]
   }
 };
 

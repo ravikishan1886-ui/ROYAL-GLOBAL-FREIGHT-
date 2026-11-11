@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Homepage -->
+  <!-- 1. Homepage -->
   <url>
     <loc>https://royalglobalfreight.com/</loc>
     <lastmod>2026-11-11</lastmod>
@@ -8,7 +8,7 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- About Company -->
+  <!-- 2. About Us -->
   <url>
     <loc>https://royalglobalfreight.com/about</loc>
     <lastmod>2026-11-11</lastmod>
@@ -16,7 +16,7 @@
     <priority>0.85</priority>
   </url>
 
-  <!-- Services Hub -->
+  <!-- 3. Our Services Hub -->
   <url>
     <loc>https://royalglobalfreight.com/services</loc>
     <lastmod>2026-11-11</lastmod>
@@ -24,57 +24,71 @@
     <priority>0.95</priority>
   </url>
 
-  <!-- Specialized Freight Services -->
+  <!-- 4. Ocean Freight -->
   <url>
     <loc>https://royalglobalfreight.com/services/ocean-freight</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
+
+  <!-- 5. Air Freight -->
   <url>
     <loc>https://royalglobalfreight.com/services/air-freight</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
+
+  <!-- 6. Road Freight -->
   <url>
     <loc>https://royalglobalfreight.com/services/road-freight</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
+
+  <!-- 7. Customs Clearance -->
   <url>
     <loc>https://royalglobalfreight.com/services/customs-clearance</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
+
+  <!-- 8. Warehousing & 3PL Distribution -->
+  <url>
+    <loc>https://royalglobalfreight.com/services/warehousing-distribution</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- 9. Project Cargo & Heavy Lift -->
   <url>
     <loc>https://royalglobalfreight.com/services/project-cargo</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
+
+  <!-- 10. Multimodal Transportation -->
   <url>
-    <loc>https://royalglobalfreight.com/services/multimodal-transport</loc>
+    <loc>https://royalglobalfreight.com/services/multimodal-transportation</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
+
+  <!-- 11. Integrated Supply Chain Solutions -->
   <url>
-    <loc>https://royalglobalfreight.com/services/warehousing-distribution</loc>
-    <lastmod>2026-11-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://royalglobalfreight.com/services/cargo-insurance</loc>
+    <loc>https://royalglobalfreight.com/services/supply-chain-solutions</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
 
-  <!-- Global Network -->
+  <!-- 12. Global Network & Corridors -->
   <url>
     <loc>https://royalglobalfreight.com/network</loc>
     <lastmod>2026-11-11</lastmod>
@@ -82,7 +96,7 @@
     <priority>0.85</priority>
   </url>
 
-  <!-- Quote Booking -->
+  <!-- 13. Request / Get a Quote -->
   <url>
     <loc>https://royalglobalfreight.com/quote</loc>
     <lastmod>2026-11-11</lastmod>
@@ -90,11 +104,27 @@
     <priority>0.95</priority>
   </url>
 
-  <!-- Contact & Global Offices -->
+  <!-- 14. Contact Us & Regional Desks -->
   <url>
     <loc>https://royalglobalfreight.com/contact</loc>
     <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
+  </url>
+
+  <!-- 15. Privacy & Data Protection Policy -->
+  <url>
+    <loc>https://royalglobalfreight.com/privacy-policy</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.50</priority>
+  </url>
+
+  <!-- 16. Standard Terms & Conditions of Freight Service -->
+  <url>
+    <loc>https://royalglobalfreight.com/terms-and-conditions</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.50</priority>
   </url>
 </urlset>

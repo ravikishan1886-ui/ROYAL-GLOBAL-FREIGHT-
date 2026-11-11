@@ -28,6 +28,7 @@ const RequestQuotePage = lazy(() => import('./components/quote/RequestQuotePage'
 const ContactPage = lazy(() => import('./components/contact/ContactPage').then(m => ({ default: m.ContactPage })));
 const AdminDashboard = lazy(() => import('./components/admin/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
 const NotFoundPage = lazy(() => import('./components/common/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
+const PolicyPage = lazy(() => import('./components/common/PolicyPage').then(m => ({ default: m.PolicyPage })));
 
 export default function App() {
   const [activePage, setActivePage] = useState<string>('home');
@@ -203,8 +204,24 @@ export default function App() {
             />
           )}
 
+          {activePage === 'privacy-policy' && (
+            <PolicyPage
+              type="privacy"
+              onNavigate={(page) => navigateTo(page)}
+              onRequestQuote={() => navigateTo('quote')}
+            />
+          )}
+
+          {activePage === 'terms-and-conditions' && (
+            <PolicyPage
+              type="terms"
+              onNavigate={(page) => navigateTo(page)}
+              onRequestQuote={() => navigateTo('quote')}
+            />
+          )}
+
           {/* Custom Branded 404 Not Found Page */}
-          {!['home', 'about', 'services', 'network', 'quote', 'contact', 'admin'].includes(activePage) && (
+          {!['home', 'about', 'services', 'network', 'quote', 'contact', 'admin', 'privacy-policy', 'terms-and-conditions'].includes(activePage) && (
             <NotFoundPage onNavigate={(page) => navigateTo(page)} />
           )}
         </Suspense>
