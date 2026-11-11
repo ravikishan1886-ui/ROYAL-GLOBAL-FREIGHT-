@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Navbar } from './components/common/Navbar';
 import { Footer } from './components/common/Footer';
 import { TrackingModal } from './components/common/TrackingModal';
@@ -15,17 +15,19 @@ import { OperationsGallery } from './components/home/OperationsGallery';
 import { WhyChooseUs } from './components/home/WhyChooseUs';
 import { InteractiveMapPreview } from './components/home/InteractiveMapPreview';
 import { CtaBanner } from './components/home/CtaBanner';
-import { AboutPage } from './components/about/AboutPage';
-import { ServicesPage } from './components/services/ServicesPage';
-import { GlobalNetworkPage } from './components/network/GlobalNetworkPage';
-import { RequestQuotePage } from './components/quote/RequestQuotePage';
-import { ContactPage } from './components/contact/ContactPage';
-import { AdminDashboard } from './components/admin/AdminDashboard';
 import { SEOHead } from './components/common/SEOHead';
-import { NotFoundPage } from './components/common/NotFoundPage';
 import { StorageService, subscribeToStore } from './services/storage';
 import { Analytics } from './services/analytics';
 import { CompanyInfo } from './types';
+
+// Code-split non-homepage route chunks to reduce initial bundle size and speed up FCP
+const AboutPage = lazy(() => import('./components/about/AboutPage').then(m => ({ default: m.AboutPage })));
+const ServicesPage = lazy(() => import('./components/services/ServicesPage').then(m => ({ default: m.ServicesPage })));
+const GlobalNetworkPage = lazy(() => import('./components/network/GlobalNetworkPage').then(m => ({ default: m.GlobalNetworkPage })));
+const RequestQuotePage = lazy(() => import('./components/quote/RequestQuotePage').then(m => ({ default: m.RequestQuotePage })));
+const ContactPage = lazy(() => import('./components/contact/ContactPage').then(m => ({ default: m.ContactPage })));
+const AdminDashboard = lazy(() => import('./components/admin/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
+const NotFoundPage = lazy(() => import('./components/common/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 
 export default function App() {
   const [activePage, setActivePage] = useState<string>('home');
@@ -109,94 +111,103 @@ export default function App() {
 
       {/* Main Page Content Router */}
       <main className="flex-1">
-        {activePage === 'home' && (
-          <div className="animate-fadeIn">
-            <Hero
+        <Suspense fallback={
+          <div className="min-h-[60vh] flex flex-col items-center justify-center p-12 bg-slate-50/50">
+            <div className="w-10 h-10 border-3 border-[#C8A45D] border-t-transparent rounded-full animate-spin mb-4" />
+            <span className="font-['Montserrat',sans-serif] text-xs font-bold text-[#071B36] uppercase tracking-widest animate-pulse">
+              Loading Royal Global Freight...
+            </span>
+          </div>
+        }>
+          {activePage === 'home' && (
+            <div className="animate-fadeIn">
+              <Hero
+                onExploreServices={() => navigateTo('services')}
+                onRequestQuote={() => navigateTo('quote')}
+                onOpenTracking={() => setIsTrackingOpen(true)}
+              />
+              <IntroSection
+                onLearnMore={() => navigateTo('about')}
+                onRequestQuote={() => navigateTo('quote')}
+              />
+              <ServicesPreview
+                onSelectService={(id) => navigateTo('services', id)}
+                onViewAllServices={() => navigateTo('services')}
+                onRequestQuote={() => navigateTo('quote')}
+              />
+              <OperationsGallery
+                onRequestQuote={(_cat) => navigateTo('quote')}
+                onExploreServices={() => navigateTo('services')}
+              />
+              <WhyChooseUs />
+              <InteractiveMapPreview
+                onExploreNetwork={() => navigateTo('network')}
+                onRequestQuote={() => navigateTo('quote')}
+              />
+              <CtaBanner
+                onRequestQuote={() => navigateTo('quote')}
+                onContactUs={() => navigateTo('contact')}
+                companyInfo={companyInfo}
+              />
+            </div>
+          )}
+
+          {activePage === 'about' && (
+            <AboutPage
+              onRequestQuote={() => navigateTo('quote')}
               onExploreServices={() => navigateTo('services')}
-              onRequestQuote={() => navigateTo('quote')}
-              onOpenTracking={() => setIsTrackingOpen(true)}
-            />
-            <IntroSection
-              onLearnMore={() => navigateTo('about')}
-              onRequestQuote={() => navigateTo('quote')}
-            />
-            <ServicesPreview
-              onSelectService={(id) => navigateTo('services', id)}
-              onViewAllServices={() => navigateTo('services')}
-              onRequestQuote={() => navigateTo('quote')}
-            />
-            <OperationsGallery
-              onRequestQuote={(_cat) => navigateTo('quote')}
-              onExploreServices={() => navigateTo('services')}
-            />
-            <WhyChooseUs />
-            <InteractiveMapPreview
-              onExploreNetwork={() => navigateTo('network')}
-              onRequestQuote={() => navigateTo('quote')}
-            />
-            <CtaBanner
-              onRequestQuote={() => navigateTo('quote')}
-              onContactUs={() => navigateTo('contact')}
+              onNavigate={(page) => navigateTo(page)}
               companyInfo={companyInfo}
             />
-          </div>
-        )}
+          )}
 
-        {activePage === 'about' && (
-          <AboutPage
-            onRequestQuote={() => navigateTo('quote')}
-            onExploreServices={() => navigateTo('services')}
-            onNavigate={(page) => navigateTo(page)}
-            companyInfo={companyInfo}
-          />
-        )}
+          {activePage === 'services' && (
+            <ServicesPage
+              initialServiceId={selectedServiceId}
+              onRequestQuote={() => navigateTo('quote')}
+              onNavigate={(page, sId) => navigateTo(page, sId)}
+            />
+          )}
 
-        {activePage === 'services' && (
-          <ServicesPage
-            initialServiceId={selectedServiceId}
-            onRequestQuote={() => navigateTo('quote')}
-            onNavigate={(page, sId) => navigateTo(page, sId)}
-          />
-        )}
+          {activePage === 'network' && (
+            <GlobalNetworkPage
+              onRequestQuote={() => navigateTo('quote')}
+              onExploreServices={() => navigateTo('services')}
+              onNavigate={(page) => navigateTo(page)}
+            />
+          )}
 
-        {activePage === 'network' && (
-          <GlobalNetworkPage
-            onRequestQuote={() => navigateTo('quote')}
-            onExploreServices={() => navigateTo('services')}
-            onNavigate={(page) => navigateTo(page)}
-          />
-        )}
+          {activePage === 'quote' && (
+            <RequestQuotePage
+              onQuoteSubmitted={(ref) => {
+                showToast(`Quote reference ${ref} registered successfully!`);
+              }}
+              onExploreServices={() => navigateTo('services')}
+              onNavigateHome={() => navigateTo('home')}
+              onNavigate={(page) => navigateTo(page)}
+            />
+          )}
 
-        {activePage === 'quote' && (
-          <RequestQuotePage
-            onQuoteSubmitted={(ref) => {
-              showToast(`Quote reference ${ref} registered successfully!`);
-            }}
-            onExploreServices={() => navigateTo('services')}
-            onNavigateHome={() => navigateTo('home')}
-            onNavigate={(page) => navigateTo(page)}
-          />
-        )}
+          {activePage === 'contact' && (
+            <ContactPage
+              companyInfo={companyInfo}
+              onRequestQuote={() => navigateTo('quote')}
+              onNavigate={(page) => navigateTo(page)}
+            />
+          )}
 
-        {activePage === 'contact' && (
-          <ContactPage
-            companyInfo={companyInfo}
-            onRequestQuote={() => navigateTo('quote')}
-            onNavigate={(page) => navigateTo(page)}
-          />
-        )}
+          {activePage === 'admin' && (
+            <AdminDashboard
+              onBackToSite={() => navigateTo('home')}
+              onRequestQuote={() => navigateTo('quote')}
+            />
+          )}
 
-        {activePage === 'admin' && (
-          <AdminDashboard
-            onBackToSite={() => navigateTo('home')}
-            onRequestQuote={() => navigateTo('quote')}
-          />
-        )}
-
-        {/* Custom Branded 404 Not Found Page */}
-        {!['home', 'about', 'services', 'network', 'quote', 'contact', 'admin'].includes(activePage) && (
-          <NotFoundPage onNavigate={(page) => navigateTo(page)} />
-        )}
+          {/* Custom Branded 404 Not Found Page */}
+          {!['home', 'about', 'services', 'network', 'quote', 'contact', 'admin'].includes(activePage) && (
+            <NotFoundPage onNavigate={(page) => navigateTo(page)} />
+          )}
+        </Suspense>
       </main>
 
       {/* Main Footer (Hidden in Admin for clear workspace) */}
