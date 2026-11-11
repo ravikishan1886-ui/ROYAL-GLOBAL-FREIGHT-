@@ -41,7 +41,7 @@ export const INITIAL_SERVICES: ServiceItem[] = [
     shortDesc: 'Full Container Load (FCL), Less than Container Load (LCL), international sea cargo and port coordination.',
     fullDesc: 'Comprehensive international ocean freight forwarding solutions tailored to global trade corridors. We coordinate reliable sea freight services across major shipping alliances, offering flexible sailing schedules and optimal routing.',
     iconName: 'Ship',
-    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=75',
     mode: 'ocean',
     features: [
       'Full Container Load (FCL) contracting',
@@ -58,7 +58,7 @@ export const INITIAL_SERVICES: ServiceItem[] = [
     shortDesc: 'International air cargo, import and export coordination, and time-sensitive cargo routing.',
     fullDesc: 'Rapid, dependable international air cargo transportation designed for high-value and time-critical consignments. Partnering with global cargo airlines to secure scheduled allocations and chartered flight space.',
     iconName: 'Plane',
-    image: 'https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=800&q=75',
     mode: 'air',
     features: [
       'International air cargo scheduling',
@@ -75,7 +75,7 @@ export const INITIAL_SERVICES: ServiceItem[] = [
     shortDesc: 'Domestic transportation, cross-border haulage coordination, and inland cargo movement solutions.',
     fullDesc: 'Dedicated road transport and cross-border trucking network facilitating reliable inland distribution, container drayage, and scheduled line-haul movements across regional trade zones.',
     iconName: 'Truck',
-    image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=75',
     mode: 'road',
     features: [
       'Full Truckload (FTL) and Less than Truckload (LTL)',
@@ -92,7 +92,7 @@ export const INITIAL_SERVICES: ServiceItem[] = [
     shortDesc: 'Import documentation coordination, export clearance support, and tariff compliance assistance.',
     fullDesc: 'Navigating regulatory standards and tariff classifications with experienced customs brokerage partners. Ensuring seamless border crossing and timely release of your cross-border shipments.',
     iconName: 'FileCheck',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=75',
     mode: 'general',
     features: [
       'Import and export documentation review',
@@ -109,7 +109,7 @@ export const INITIAL_SERVICES: ServiceItem[] = [
     shortDesc: 'Storage coordination, cargo handling, inventory control, and distribution support.',
     fullDesc: 'Modern warehousing solutions strategically situated near major shipping ports and transportation hubs. Supporting secure short-term and long-term storage, sorting, and fulfillment operations.',
     iconName: 'Warehouse',
-    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=75',
     mode: 'general',
     features: [
       'Bonded and non-bonded warehouse coordination',
@@ -126,7 +126,7 @@ export const INITIAL_SERVICES: ServiceItem[] = [
     shortDesc: 'Heavy cargo coordination, oversized equipment planning, and complex project logistics.',
     fullDesc: 'Specialized logistics engineering for oversized, heavy-lift, and out-of-gauge industrial equipment. Every phase is meticulously planned from route surveys to specialized rigging and multi-axle trailers.',
     iconName: 'Cog',
-    image: 'https://images.unsplash.com/photo-1577705998148-6da4f3963bc8?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1577705998148-6da4f3963bc8?auto=format&fit=crop&w=800&q=75',
     mode: 'multimodal',
     features: [
       'Heavy-lift and breakbulk sea transportation',
@@ -143,7 +143,7 @@ export const INITIAL_SERVICES: ServiceItem[] = [
     shortDesc: 'Sea and road, air and road, and rail integrations for cost-effective international transit.',
     fullDesc: 'Harmonizing ocean, air, rail, and road modalities under a single coordinated workflow to deliver the ideal balance between transit speed and logistics expenditure.',
     iconName: 'Boxes',
-    image: 'https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=800&q=75',
     mode: 'multimodal',
     features: [
       'Sea-Air hybrid freight coordination',
@@ -160,7 +160,7 @@ export const INITIAL_SERVICES: ServiceItem[] = [
     shortDesc: 'Freight coordination, shipment visibility, and integrated logistics planning.',
     fullDesc: 'Strategic supply chain consultancy and cargo flow orchestration designed to enhance resilience, reduce lead times, and optimize total landed costs across your supply network.',
     iconName: 'Network',
-    image: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=800&q=75',
     mode: 'general',
     features: [
       'End-to-end cargo movement coordination',

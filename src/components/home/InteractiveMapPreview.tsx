@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Globe, Compass, ArrowRight, Anchor, Plane, Truck, Info } from 'lucide-react';
+import { Globe, ArrowRight, Anchor, Plane, Truck, Compass, CheckCircle2 } from 'lucide-react';
 
 interface InteractiveMapPreviewProps {
   onExploreNetwork?: () => void;
@@ -12,69 +12,17 @@ export const InteractiveMapPreview: React.FC<InteractiveMapPreviewProps> = ({
   onRequestQuote,
   isFullPage = false
 }) => {
-  const [activeRegion, setActiveRegion] = useState<string>('Asia');
-  const [activeMode, setActiveMode] = useState<'all' | 'ocean' | 'air' | 'road'>('all');
+  const [activeGateway, setActiveGateway] = useState<string>('London');
 
-  const regions = [
-    {
-      name: 'Asia',
-      hubs: 'Shanghai, Singapore, Busan, Hong Kong, Tokyo',
-      corridors: 'Trans-Pacific & Asia-Europe Maritime Corridors',
-      stats: 'Major Container Manufacturing & Electronics Export Lanes',
-      x: 740,
-      y: 210,
-    },
-    {
-      name: 'Europe',
-      hubs: 'Rotterdam, Antwerp, Hamburg, Frankfurt (Air Cargo), Felixstowe',
-      corridors: 'North Sea & Mediterranean Gateway Logistics',
-      stats: 'Industrial Machinery, Chemicals & High-Tech Components',
-      x: 500,
-      y: 160,
-    },
-    {
-      name: 'Middle East',
-      hubs: 'Jebel Ali (Dubai), Port of Salalah, King Abdullah Port',
-      corridors: 'East-West Maritime Crossroads & Air Cargo Transshipment',
-      stats: 'Intercontinental Consolidation & Multimodal Staging',
-      x: 590,
-      y: 230,
-    },
-    {
-      name: 'North America',
-      hubs: 'Los Angeles/Long Beach, New York/New Jersey, Chicago, Savannah',
-      corridors: 'Trans-Pacific Eastbound & Transatlantic Westbound',
-      stats: 'Consumer Goods, Automotive & Intermodal Inland Rail',
-      x: 230,
-      y: 180,
-    },
-    {
-      name: 'South America',
-      hubs: 'Santos, Buenos Aires, Callao, Cartagena',
-      corridors: 'Pan-American Coastal & Transatlantic South Corridors',
-      stats: 'Commodities, Agricultural Produce & Mineral Freight',
-      x: 320,
-      y: 360,
-    },
-    {
-      name: 'Africa',
-      hubs: 'Durban, Tanger Med, Mombasa, Port Said',
-      corridors: 'Cape Route & Mediterranean-Red Sea Arteries',
-      stats: 'Raw Materials, Infrastructure Cargo & Consumer Inflow',
-      x: 520,
-      y: 300,
-    },
-    {
-      name: 'Oceania',
-      hubs: 'Sydney, Melbourne, Auckland, Brisbane',
-      corridors: 'Australasian Maritime feeder & Trans-Tasman corridors',
-      stats: 'Specialized Dry Bulk, Reefer Foods & General Merchandise',
-      x: 820,
-      y: 390,
-    }
+  const gateways = [
+    { name: 'London', role: 'European Maritime & Air Cargo Gateway', desc: 'Direct consolidation hub linking European ports and trans-Eurasian liner corridors.' },
+    { name: 'New York', role: 'North American Atlantic Gateway', desc: 'Major East Coast container terminal handling North Atlantic & Pan-American traffic.' },
+    { name: 'Cairo', role: 'Suez Canal & Middle East Crossroads', desc: 'Vital maritime nexus connecting Mediterranean and Indian Ocean shipping channels.' },
+    { name: 'Beijing', role: 'Asia-Pacific Production & Rail Terminal', desc: 'Prime manufacturing consolidation center with high-volume Pacific line-haul.' },
+    { name: 'Moscow', role: 'Eurasian Trans-Continental Corridor', desc: 'Intermodal freight rail linking East Asian hubs directly into regional distribution.' }
   ];
 
-  const currentRegionData = regions.find(r => r.name === activeRegion) || regions[0];
+  const currentGateway = gateways.find(g => g.name === activeGateway) || gateways[0];
 
   return (
     <section className={`py-20 lg:py-28 bg-[#041021] text-white relative overflow-hidden ${isFullPage ? 'min-h-[85vh]' : ''}`}>
@@ -100,290 +48,79 @@ export const InteractiveMapPreview: React.FC<InteractiveMapPreviewProps> = ({
           </p>
         </div>
 
-        {/* Transport Mode Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mt-8">
-          {[
-            { id: 'all', label: 'All Global Corridors', icon: Globe },
-            { id: 'ocean', label: 'Ocean Freight Lanes', icon: Anchor },
-            { id: 'air', label: 'Air Cargo Corridors', icon: Plane },
-            { id: 'road', label: 'Inland Haulage Routes', icon: Truck },
-          ].map((mode) => {
-            const Icon = mode.icon;
-            const isSelected = activeMode === mode.id;
-            return (
-              <button
-                key={mode.id}
-                onClick={() => setActiveMode(mode.id as any)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
-                  isSelected
-                    ? 'bg-[#C8A45D] text-[#071B36] shadow-md shadow-[#C8A45D]/20'
-                    : 'bg-[#071B36] text-slate-300 hover:text-white border border-slate-700/60'
-                }`}
-              >
-                <Icon className="w-3.5 h-3.5" />
-                <span>{mode.label}</span>
-              </button>
-            );
-          })}
-        </div>
+        {/* Global Logistics Route Map Display */}
+        <div className="mt-12 space-y-6">
+          <div className="relative rounded-3xl overflow-hidden border-2 border-[#C8A45D]/40 shadow-2xl bg-[#071B36] group">
+            <img
+              src="/assets/aistudio/Gemini_Generated_Image_sxw0xdsxw0xdsxw0_2_90aa3eb2.jpg"
+              alt="Royal Global Freight International Shipping Trade Routes and Global Corridors Map"
+              className="w-full h-auto max-h-[640px] object-cover object-center transition-transform duration-700 group-hover:scale-[1.01]"
+              loading="lazy"
+            />
+            
+            {/* Subtle Gradient Framing */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#041021]/80 via-transparent to-black/20 pointer-events-none" />
 
-        {/* Region Selector Chips */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
-          {regions.map((reg) => {
-            const isSelected = activeRegion === reg.name;
-            return (
-              <button
-                key={reg.name}
-                onClick={() => setActiveRegion(reg.name)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
-                  isSelected
-                    ? 'bg-[#DFBF7A] text-[#071B36] font-bold ring-2 ring-[#C8A45D]'
-                    : 'bg-white/5 text-slate-300 hover:bg-white/10 border border-white/5'
-                }`}
-              >
-                {reg.name}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* World Map Graphical Visualization */}
-        <div className="mt-10 relative bg-[#071B36]/90 border border-[#C8A45D]/30 rounded-2xl p-4 sm:p-8 shadow-2xl backdrop-blur-md overflow-hidden">
-          
-          <div className="relative w-full aspect-[16/8] min-h-[340px] max-h-[560px]">
-            <svg
-              viewBox="0 0 1000 500"
-              className="w-full h-full"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                {/* Gradient for Shipping Lines */}
-                <linearGradient id="routeGold" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#C8A45D" stopOpacity="0.8" />
-                  <stop offset="50%" stopColor="#DFBF7A" stopOpacity="1" />
-                  <stop offset="100%" stopColor="#C8A45D" stopOpacity="0.8" />
-                </linearGradient>
-
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                  <feMerge>
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                  </feMerge>
-                </filter>
-              </defs>
-
-              {/* World Grid Lines */}
-              <line x1="0" y1="125" x2="1000" y2="125" stroke="#102D50" strokeWidth="0.5" strokeDasharray="4 4" />
-              <line x1="0" y1="250" x2="1000" y2="250" stroke="#102D50" strokeWidth="0.8" />
-              <line x1="0" y1="375" x2="1000" y2="375" stroke="#102D50" strokeWidth="0.5" strokeDasharray="4 4" />
-              <line x1="250" y1="0" x2="250" y2="500" stroke="#102D50" strokeWidth="0.5" strokeDasharray="4 4" />
-              <line x1="500" y1="0" x2="500" y2="500" stroke="#102D50" strokeWidth="0.8" />
-              <line x1="750" y1="0" x2="750" y2="500" stroke="#102D50" strokeWidth="0.5" strokeDasharray="4 4" />
-
-              {/* Simplified Stylized Continents Outlines */}
-              {/* North America */}
-              <path
-                d="M120 90 L240 80 L300 130 L260 210 L220 220 L160 170 Z"
-                fill="#0A2242"
-                stroke="#173E6D"
-                strokeWidth="1.2"
-              />
-              {/* South America */}
-              <path
-                d="M260 250 L340 280 L350 370 L300 450 L270 380 L250 290 Z"
-                fill="#0A2242"
-                stroke="#173E6D"
-                strokeWidth="1.2"
-              />
-              {/* Europe */}
-              <path
-                d="M450 110 L540 100 L560 170 L480 190 L440 160 Z"
-                fill="#0A2242"
-                stroke="#173E6D"
-                strokeWidth="1.2"
-              />
-              {/* Africa */}
-              <path
-                d="M460 210 L560 220 L580 320 L520 420 L470 350 L450 260 Z"
-                fill="#0A2242"
-                stroke="#173E6D"
-                strokeWidth="1.2"
-              />
-              {/* Asia */}
-              <path
-                d="M570 90 L850 80 L880 170 L800 280 L680 280 L590 200 Z"
-                fill="#0A2242"
-                stroke="#173E6D"
-                strokeWidth="1.2"
-              />
-              {/* Oceania / Australia */}
-              <path
-                d="M770 340 L880 330 L870 420 L780 430 Z"
-                fill="#0A2242"
-                stroke="#173E6D"
-                strokeWidth="1.2"
-              />
-
-              {/* Major Maritime & Air Trade Corridors (Animated Curved Arcs) */}
-              {/* Trans-Pacific Lane (Asia to NA West Coast) */}
-              {(activeMode === 'all' || activeMode === 'ocean') && (
-                <path
-                  d="M740 210 Q980 90 230 180"
-                  stroke="url(#routeGold)"
-                  strokeWidth="2"
-                  strokeDasharray="6 4"
-                  className="animate-pulse"
-                />
-              )}
-
-              {/* Asia-Europe Maritime Corridor (via Suez) */}
-              {(activeMode === 'all' || activeMode === 'ocean') && (
-                <path
-                  d="M740 210 Q660 270 590 230 Q540 200 500 160"
-                  stroke="#C8A45D"
-                  strokeWidth="2.2"
-                  strokeDasharray="5 3"
-                />
-              )}
-
-              {/* Transatlantic Corridor (Europe to NA East Coast) */}
-              {(activeMode === 'all' || activeMode === 'ocean' || activeMode === 'air') && (
-                <path
-                  d="M500 160 Q380 120 250 180"
-                  stroke="#DFBF7A"
-                  strokeWidth="2"
-                  strokeDasharray="4 4"
-                />
-              )}
-
-              {/* Europe - South America */}
-              {(activeMode === 'all' || activeMode === 'ocean') && (
-                <path
-                  d="M500 160 Q420 260 320 360"
-                  stroke="#C8A45D"
-                  strokeWidth="1.5"
-                  strokeDasharray="6 4"
-                  strokeOpacity="0.7"
-                />
-              )}
-
-              {/* Asia - Oceania Corridor */}
-              {(activeMode === 'all' || activeMode === 'ocean') && (
-                <path
-                  d="M740 210 Q780 280 820 390"
-                  stroke="#C8A45D"
-                  strokeWidth="1.8"
-                  strokeDasharray="5 3"
-                />
-              )}
-
-              {/* Asia - Middle East - Africa */}
-              {(activeMode === 'all' || activeMode === 'air' || activeMode === 'ocean') && (
-                <path
-                  d="M740 210 Q620 220 520 300"
-                  stroke="#DFBF7A"
-                  strokeWidth="1.5"
-                  strokeDasharray="4 4"
-                  strokeOpacity="0.75"
-                />
-              )}
-
-              {/* North America - South America */}
-              {(activeMode === 'all' || activeMode === 'road' || activeMode === 'ocean') && (
-                <path
-                  d="M230 180 Q270 270 320 360"
-                  stroke="#C8A45D"
-                  strokeWidth="1.5"
-                  strokeDasharray="5 3"
-                  strokeOpacity="0.7"
-                />
-              )}
-
-              {/* Interactive Region Coordinate Nodes */}
-              {regions.map((reg) => {
-                const isSelected = activeRegion === reg.name;
-                return (
-                  <g
-                    key={reg.name}
-                    className="cursor-pointer group"
-                    onClick={() => setActiveRegion(reg.name)}
-                  >
-                    {/* Pulsing ring if selected */}
-                    {isSelected && (
-                      <circle
-                        cx={reg.x}
-                        cy={reg.y}
-                        r="18"
-                        stroke="#C8A45D"
-                        strokeWidth="1.5"
-                        fill="#C8A45D"
-                        fillOpacity="0.2"
-                        className="animate-ping"
-                      />
-                    )}
-                    <circle
-                      cx={reg.x}
-                      cy={reg.y}
-                      r={isSelected ? 8 : 6}
-                      fill={isSelected ? '#DFBF7A' : '#C8A45D'}
-                      stroke="#071B36"
-                      strokeWidth="2"
-                      filter="url(#glow)"
-                    />
-                    <text
-                      x={reg.x}
-                      y={reg.y - 12}
-                      textAnchor="middle"
-                      fill={isSelected ? '#FFFFFF' : '#C8A45D'}
-                      fontSize={isSelected ? '12' : '10'}
-                      fontWeight="bold"
-                      fontFamily="Montserrat, sans-serif"
-                      letterSpacing="1"
-                    >
-                      {reg.name.toUpperCase()}
-                    </text>
-                  </g>
-                );
-              })}
-            </svg>
-          </div>
-
-          {/* Region Detail Card Overlay */}
-          <div className="mt-6 bg-[#0A2242] border border-[#C8A45D]/40 rounded-xl p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-[#C8A45D] text-[#071B36]">
-                  Selected Region
-                </span>
-                <h3 className="text-xl font-bold text-white tracking-wide">
-                  {currentRegionData.name} Trade Corridors
-                </h3>
+            {/* Strategic Gateway Selector Badges (Overlaid Bottom Bar) */}
+            <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 bg-[#071B36]/90 backdrop-blur-md border border-[#C8A45D]/40 rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#C8A45D] animate-ping" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-[#DFBF7A]">
+                    Key Connected Gateway
+                  </span>
+                  <span className="text-white font-extrabold text-sm sm:text-base">
+                    {currentGateway.name} Hub
+                  </span>
+                </div>
+                <p className="text-xs text-slate-300 line-clamp-1 sm:line-clamp-none">
+                  <strong className="text-white">{currentGateway.role}:</strong> {currentGateway.desc}
+                </p>
               </div>
-              <p className="text-xs text-slate-300">
-                <strong className="text-[#DFBF7A]">Key Shipping Gateways & Hubs:</strong> {currentRegionData.hubs}
-              </p>
-              <p className="text-xs text-slate-400">
-                <strong className="text-slate-200">Dominant Cargo Flows:</strong> {currentRegionData.stats}
-              </p>
-            </div>
 
-            <div className="flex items-center gap-3 shrink-0">
-              <button
-                onClick={onRequestQuote}
-                className="px-6 py-2.5 bg-[#C8A45D] hover:bg-[#DFBF7A] text-[#071B36] font-bold text-xs uppercase tracking-wider rounded-xl transition cursor-pointer"
-              >
-                Inquire on this Lane
-              </button>
+              {/* Gateway Quick-Switch Buttons */}
+              <div className="flex flex-wrap items-center gap-1.5 shrink-0">
+                {gateways.map((g) => (
+                  <button
+                    key={g.name}
+                    onClick={() => setActiveGateway(g.name)}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
+                      activeGateway === g.name
+                        ? 'bg-[#C8A45D] text-[#071B36] shadow-md shadow-[#C8A45D]/30'
+                        : 'bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white'
+                    }`}
+                  >
+                    {g.name}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
+          {/* Operational Routing Inquiry Callout */}
+          <div className="bg-[#0A2242] border border-[#C8A45D]/40 rounded-2xl p-5 sm:p-6 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#071B36] border border-[#C8A45D]/50 flex items-center justify-center text-[#DFBF7A] shrink-0">
+                <Compass className="w-5 h-5" />
+              </div>
+              <div className="text-left">
+                <h4 className="font-bold text-sm text-white">Need Customized Route Planning Along These Corridors?</h4>
+                <p className="text-xs text-slate-400">Our freight coordinators secure dedicated vessel allocations and optimized transit times.</p>
+              </div>
+            </div>
+
+            <button
+              onClick={onRequestQuote}
+              className="w-full sm:w-auto px-6 py-3 bg-[#C8A45D] hover:bg-[#DFBF7A] text-[#071B36] font-extrabold text-xs uppercase tracking-wider rounded-xl transition shadow-lg shrink-0 flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <span>REQUEST ROUTING QUOTE</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
         {/* Operational Disclaimer Note (Rule compliance) */}
-        <div className="mt-6 flex items-start gap-2.5 text-xs text-slate-400 max-w-2xl mx-auto text-center justify-center">
-          <Info className="w-4 h-4 text-[#C8A45D] shrink-0 mt-0.5" />
+        <div className="mt-8 text-xs text-slate-400 max-w-2xl mx-auto text-center">
           <span>
             Royal Global Freight coordinates international carriage across verified commercial shipping lanes and alliance agreements without claiming proprietary physical infrastructure or unverified foreign branch entities.
           </span>

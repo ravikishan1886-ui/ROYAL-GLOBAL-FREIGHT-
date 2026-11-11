@@ -40,7 +40,7 @@ export const OPERATIONAL_ASSETS: OperationalAsset[] = [
     categoryLabel: 'Ocean Vessels',
     title: 'Ultra-Large Container Vessel (ULCV)',
     subtitle: 'Trans-Pacific & Asia-Europe Maritime Line Haul',
-    imageUrl: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1600&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=75',
     alt: 'Ultra-large international container vessel sailing maritime trade corridor',
     specBadge: '24,000 TEU Nominal Capacity',
     specs: [
@@ -62,7 +62,7 @@ export const OPERATIONAL_ASSETS: OperationalAsset[] = [
     categoryLabel: 'Ocean Vessels',
     title: 'Deep-Ocean Container Carrier Fleet',
     subtitle: 'Global Maritime Trade Lane Connectivity',
-    imageUrl: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1600&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=800&q=75',
     alt: 'Massive modern container cargo liner traversing international deep ocean trade lanes',
     specBadge: '18,500 TEU High-Speed Transit',
     specs: [
@@ -86,7 +86,7 @@ export const OPERATIONAL_ASSETS: OperationalAsset[] = [
     categoryLabel: 'Port Terminals',
     title: 'Deepwater Quay & Ship-to-Shore Cranes',
     subtitle: 'Automated Container Berthing & Discharge',
-    imageUrl: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=75',
     alt: 'Automated container seaport terminal with Ship-to-Shore quay cranes',
     specBadge: '65m Outreach STS Gantry Cranes',
     specs: [
@@ -108,7 +108,7 @@ export const OPERATIONAL_ASSETS: OperationalAsset[] = [
     categoryLabel: 'Port Terminals',
     title: 'Automated Container Terminal Stacking Hub',
     subtitle: 'High-Density Yard Logistics & Drayage Gateway',
-    imageUrl: 'https://images.unsplash.com/photo-1524522173746-f628baad3644?auto=format&fit=crop&w=1600&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1524522173746-f628baad3644?auto=format&fit=crop&w=800&q=75',
     alt: 'High-density international shipping seaport with active vessel berthing and container stacks',
     specBadge: '1.8M TEU Annual Throughput Hub',
     specs: [
@@ -132,7 +132,7 @@ export const OPERATIONAL_ASSETS: OperationalAsset[] = [
     categoryLabel: 'Airfreight & Aviation',
     title: 'Wide-Body Freighter Aircraft Apron Loading',
     subtitle: 'Scheduled International Main-Deck Aviation Freight',
-    imageUrl: 'https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=1600&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=800&q=75',
     alt: 'Modern wide-body cargo aircraft being loaded on the international airport apron',
     specBadge: '112,000 kg Payload Capacity',
     specs: [
@@ -154,7 +154,7 @@ export const OPERATIONAL_ASSETS: OperationalAsset[] = [
     categoryLabel: 'Airfreight & Aviation',
     title: 'Express Air Cargo & Global Flight Operations',
     subtitle: 'Dedicated Flight Corridors & Priority Charters',
-    imageUrl: 'https://images.unsplash.com/photo-1570710891163-6d3b5c47248b?auto=format&fit=crop&w=1600&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1570710891163-6d3b5c47248b?auto=format&fit=crop&w=800&q=75',
     alt: 'Aviation cargo freighter on airport apron prepared for international express departure',
     specBadge: 'Time-Definite International Uplift',
     specs: [
@@ -178,7 +178,7 @@ export const OPERATIONAL_ASSETS: OperationalAsset[] = [
     categoryLabel: 'Heavy Load & Engineering',
     title: 'Harbor Heavy-Lift Gantry Cranes',
     subtitle: 'Breakbulk Vessel Hold & Industrial Rigging',
-    imageUrl: 'https://images.unsplash.com/photo-1577705998148-6da4f3963bc8?auto=format&fit=crop&w=1600&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1577705998148-6da4f3963bc8?auto=format&fit=crop&w=800&q=75',
     alt: 'Heavy duty harbor gantry cranes handling breakbulk project machinery',
     specBadge: '250-Ton Tandem Heavy Lift Capacity',
     specs: [
@@ -200,7 +200,7 @@ export const OPERATIONAL_ASSETS: OperationalAsset[] = [
     categoryLabel: 'Heavy Load & Engineering',
     title: 'Out-Of-Gauge Industrial Machinery & Rigging',
     subtitle: 'Specialized Modular Hydraulic Platform Transport',
-    imageUrl: 'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=1600&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=800&q=75',
     alt: 'Heavy industrial gantry and overhead crane lifting massive structural components',
     specBadge: 'Multi-Axle Modular Transporters (SPMT)',
     specs: [
@@ -224,7 +224,7 @@ export const OPERATIONAL_ASSETS: OperationalAsset[] = [
     categoryLabel: 'Multimodal Transport',
     title: 'Intermodal Freight Rail Corridor',
     subtitle: 'Transcontinental Port-to-Inland Rail Connection',
-    imageUrl: 'https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1600&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=800&q=75',
     alt: 'Transcontinental intermodal container freight train connecting seaports to inland terminals',
     specBadge: 'Double-Stack Rail Intermodal Service',
     specs: [
@@ -246,7 +246,7 @@ export const OPERATIONAL_ASSETS: OperationalAsset[] = [
     categoryLabel: 'Multimodal Transport',
     title: 'Integrated Heavy Road Haulage Fleet',
     subtitle: 'Cross-Border Trucking & Port Drayage Gateway',
-    imageUrl: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1600&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=75',
     alt: 'Commercial heavy freight haulage vehicle operating on international transport route',
     specBadge: 'Direct Drayage & Overland FTL/LTL',
     specs: [
