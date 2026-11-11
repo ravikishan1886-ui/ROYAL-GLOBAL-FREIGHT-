@@ -13,15 +13,18 @@ import {
 } from 'lucide-react';
 import { InteractiveMapPreview } from '../home/InteractiveMapPreview';
 import { Logo } from '../common/Logo';
+import { Breadcrumbs } from '../common/Breadcrumbs';
 
 interface GlobalNetworkPageProps {
   onRequestQuote: () => void;
   onExploreServices: () => void;
+  onNavigate?: (page: string) => void;
 }
 
 export const GlobalNetworkPage: React.FC<GlobalNetworkPageProps> = ({
   onRequestQuote,
-  onExploreServices
+  onExploreServices: _onExploreServices,
+  onNavigate
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'ocean' | 'air' | 'road'>('all');
 
@@ -101,6 +104,16 @@ export const GlobalNetworkPage: React.FC<GlobalNetworkPageProps> = ({
           </p>
         </div>
       </section>
+
+      {/* Breadcrumbs Navigation */}
+      <div className="bg-[#F4F6F9] border-b border-slate-200">
+        <Breadcrumbs
+          items={[
+            { name: 'Home', path: '/', onClick: () => onNavigate && onNavigate('home') },
+            { name: 'Global Network', path: '/network' }
+          ]}
+        />
+      </div>
 
       {/* Interactive Map Component Full Page Mode */}
       <InteractiveMapPreview

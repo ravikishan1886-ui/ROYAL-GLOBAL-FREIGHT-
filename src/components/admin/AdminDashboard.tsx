@@ -771,6 +771,32 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite, on
 
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">
+                  State / Province / Region
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. Maharashtra"
+                  value={companyInfo.state || ''}
+                  onChange={(e) => setCompanyInfo({ ...companyInfo, state: e.target.value })}
+                  className="w-full px-4 py-2.5 bg-[#0A2242] border border-slate-700 rounded-xl text-xs text-white outline-none focus:border-[#C8A45D]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">
+                  Postal / ZIP Code
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. 400001"
+                  value={companyInfo.postalCode || ''}
+                  onChange={(e) => setCompanyInfo({ ...companyInfo, postalCode: e.target.value })}
+                  className="w-full px-4 py-2.5 bg-[#0A2242] border border-slate-700 rounded-xl text-xs text-white outline-none focus:border-[#C8A45D]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">
                   Working Hours Description
                 </label>
                 <input
@@ -791,6 +817,49 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ onBackToSite, on
                   onChange={(e) => setCompanyInfo({ ...companyInfo, supportHours: e.target.value })}
                   className="w-full px-4 py-2.5 bg-[#0A2242] border border-slate-700 rounded-xl text-xs text-white outline-none focus:border-[#C8A45D]"
                 />
+              </div>
+
+              {/* SEO & ANALYTICS INTEGRATION SECTION */}
+              <div className="sm:col-span-2 pt-4 border-t border-slate-800">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#DFBF7A] mb-1">
+                  SEO & Tracking Integrations (Google Search Console & Google Analytics 4)
+                </h4>
+                <p className="text-[11px] text-slate-400 mb-4">
+                  Configure search engine verification and real-time conversion tracking. Changes apply across all pages.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">
+                      Google Analytics 4 Measurement ID
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. G-ABC1234567"
+                      value={companyInfo.gaMeasurementId || ''}
+                      onChange={(e) => setCompanyInfo({ ...companyInfo, gaMeasurementId: e.target.value })}
+                      className="w-full px-4 py-2.5 bg-[#0A2242] border border-slate-700 rounded-xl text-xs text-white outline-none focus:border-[#C8A45D] font-mono"
+                    />
+                    <span className="text-[10px] text-slate-400 block mt-1">
+                      Tracks quote requests, contact queries, phone dials & WhatsApp taps.
+                    </span>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1">
+                      Google Search Console Verification Token
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. aB1cD2eF3gH4..."
+                      value={companyInfo.gscVerificationCode || ''}
+                      onChange={(e) => setCompanyInfo({ ...companyInfo, gscVerificationCode: e.target.value })}
+                      className="w-full px-4 py-2.5 bg-[#0A2242] border border-slate-700 rounded-xl text-xs text-white outline-none focus:border-[#C8A45D] font-mono"
+                    />
+                    <span className="text-[10px] text-slate-400 block mt-1">
+                      Injected automatically into &lt;meta name="google-site-verification"&gt;.
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
 

@@ -23,10 +23,14 @@ export const INITIAL_COMPANY_INFO: CompanyInfo = {
   emergencyPhone: '+1 (888) 743-7692',
   address: 'Suite 2400, International Maritime Tower, Harbor Boulevard',
   city: 'Singapore & London Global Gateways',
+  state: 'Harbor Commercial District',
+  postalCode: '018981',
   country: 'Global Operations Headquarters',
   whatsAppNumber: '+18004829921',
   workingHours: 'Monday – Friday: 08:00 – 18:00 (UTC)',
-  supportHours: '24/7 Priority Shipment Coordination Desk'
+  supportHours: '24/7 Priority Shipment Coordination Desk',
+  gaMeasurementId: '',
+  gscVerificationCode: ''
 };
 
 export const INITIAL_SERVICES: ServiceItem[] = [

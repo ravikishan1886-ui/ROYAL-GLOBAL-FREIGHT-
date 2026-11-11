@@ -14,15 +14,18 @@ import {
 } from 'lucide-react';
 import { StorageService } from '../../services/storage';
 import { CompanyInfo, ContactEnquiry } from '../../types';
-import { generateContactReference, isValidEmail, isValidPhone } from '../../utils/enquiry';
+import { isValidEmail, isValidPhone, generateContactReference } from '../../utils/enquiry';
 import { Logo } from '../common/Logo';
+import { Breadcrumbs } from '../common/Breadcrumbs';
+import { Analytics } from '../../services/analytics';
 
 interface ContactPageProps {
   companyInfo: CompanyInfo;
   onRequestQuote: () => void;
+  onNavigate?: (page: string) => void;
 }
 
-export const ContactPage: React.FC<ContactPageProps> = ({ companyInfo, onRequestQuote }) => {
+export const ContactPage: React.FC<ContactPageProps> = ({ companyInfo, onRequestQuote, onNavigate }) => {
   const [formData, setFormData] = useState({
     name: '',
     companyName: '',
@@ -90,12 +93,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({ companyInfo, onRequest
       };
 
       StorageService.addContact(newContact);
+      Analytics.trackContactSubmission(newContact.subject);
       setIsSubmitting(false);
       setSubmittedRef(refNumber);
     }, 700);
   };
 
   const handleWhatsAppClick = () => {
+    Analytics.trackWhatsAppClick('contact_page');
     const cleanNumber = companyInfo.whatsAppNumber.replace(/[^0-9]/g, '');
     const message = encodeURIComponent(`Hello Royal Global Freight team, I would like to inquire about international shipping services.`);
     window.open(`https://wa.me/${cleanNumber}?text=${message}`, '_blank');

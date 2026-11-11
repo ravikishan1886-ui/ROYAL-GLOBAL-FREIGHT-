@@ -16,16 +16,19 @@ import {
 } from 'lucide-react';
 import { CompanyInfo } from '../../types';
 import { Logo } from '../common/Logo';
+import { Breadcrumbs } from '../common/Breadcrumbs';
 
 interface AboutPageProps {
   onRequestQuote: () => void;
   onExploreServices: () => void;
+  onNavigate?: (page: string) => void;
   companyInfo: CompanyInfo;
 }
 
 export const AboutPage: React.FC<AboutPageProps> = ({
   onRequestQuote,
   onExploreServices,
+  onNavigate,
   companyInfo
 }) => {
   const coreValues = [
@@ -98,6 +101,16 @@ export const AboutPage: React.FC<AboutPageProps> = ({
           </p>
         </div>
       </section>
+
+      {/* Breadcrumbs Navigation */}
+      <div className="bg-[#F4F6F9] border-b border-slate-200">
+        <Breadcrumbs
+          items={[
+            { name: 'Home', path: '/', onClick: () => onNavigate && onNavigate('home') },
+            { name: 'About Us', path: '/about' }
+          ]}
+        />
+      </div>
 
       {/* Company Overview & Who We Are */}
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-8">

@@ -62,10 +62,14 @@ export interface CompanyInfo {
   emergencyPhone: string;
   address: string;
   city: string;
+  state?: string;
+  postalCode?: string;
   country: string;
   whatsAppNumber: string;
   workingHours: string;
   supportHours: string;
+  gaMeasurementId?: string;
+  gscVerificationCode?: string;
 }
 
 export interface TrackingMilestone {

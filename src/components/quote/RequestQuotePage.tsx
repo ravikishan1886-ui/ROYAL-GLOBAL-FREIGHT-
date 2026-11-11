@@ -19,17 +19,21 @@ import { StorageService } from '../../services/storage';
 import { QuoteEnquiry, ShipmentMode } from '../../types';
 import { generateQuoteReference, validateQuoteData } from '../../utils/enquiry';
 import { Logo } from '../common/Logo';
+import { Breadcrumbs } from '../common/Breadcrumbs';
+import { Analytics } from '../../services/analytics';
 
 interface RequestQuotePageProps {
   onQuoteSubmitted?: (refNumber: string) => void;
   onExploreServices: () => void;
   onNavigateHome: () => void;
+  onNavigate?: (page: string) => void;
 }
 
 export const RequestQuotePage: React.FC<RequestQuotePageProps> = ({
   onQuoteSubmitted,
   onExploreServices,
-  onNavigateHome
+  onNavigateHome,
+  onNavigate
 }) => {
   // Form State
   const [formData, setFormData] = useState<Partial<QuoteEnquiry>>({
@@ -167,6 +171,14 @@ export const RequestQuotePage: React.FC<RequestQuotePageProps> = ({
 
       // Persist to store (synchronized with Admin Dashboard)
       StorageService.addQuote(newEnquiry);
+
+      // Trigger privacy-safe conversion event in GA4
+      Analytics.trackQuoteSubmission({
+        shipmentMode: newEnquiry.shipmentMode,
+        originCountry: newEnquiry.originCountry,
+        destinationCountry: newEnquiry.destinationCountry,
+        grossWeightKg: newEnquiry.grossWeightKg
+      });
 
       setIsSubmitting(false);
       setSubmittedRef(refNumber);
@@ -323,6 +335,16 @@ export const RequestQuotePage: React.FC<RequestQuotePageProps> = ({
           </p>
         </div>
       </section>
+
+      {/* Breadcrumbs Navigation */}
+      <div className="bg-[#F4F6F9] border-b border-slate-200">
+        <Breadcrumbs
+          items={[
+            { name: 'Home', path: '/', onClick: onNavigateHome },
+            { name: 'Request a Quote', path: '/quote' }
+          ]}
+        />
+      </div>
 
       {/* Main Quotation Form Container */}
       <div className="max-w-4xl mx-auto px-4 sm:px-8 -mt-8 relative z-20">

@@ -21,7 +21,10 @@ import { GlobalNetworkPage } from './components/network/GlobalNetworkPage';
 import { RequestQuotePage } from './components/quote/RequestQuotePage';
 import { ContactPage } from './components/contact/ContactPage';
 import { AdminDashboard } from './components/admin/AdminDashboard';
+import { SEOHead } from './components/common/SEOHead';
+import { NotFoundPage } from './components/common/NotFoundPage';
 import { StorageService, subscribeToStore } from './services/storage';
+import { Analytics } from './services/analytics';
 import { CompanyInfo } from './types';
 
 export default function App() {
@@ -32,11 +35,16 @@ export default function App() {
   const [companyInfo, setCompanyInfo] = useState<CompanyInfo>(StorageService.getCompanyInfo());
   const [toastMessage, setToastMessage] = useState<string>('');
 
-  // Sync state with hash or storage
+  // Sync state with hash or storage & initialize Analytics
   useEffect(() => {
+    // Initialize GA4 tracking
+    Analytics.init(companyInfo.gaMeasurementId);
+
     const handleHash = () => {
       const hash = window.location.hash.replace('#', '').trim();
-      if (['home', 'about', 'services', 'network', 'quote', 'contact', 'admin'].includes(hash)) {
+      if (!hash) {
+        setActivePage('home');
+      } else {
         setActivePage(hash);
       }
     };
@@ -45,14 +53,16 @@ export default function App() {
 
     // Subscribe to store updates (e.g. if admin changes company info or new quotes come in)
     const unsubscribe = subscribeToStore(() => {
-      setCompanyInfo(StorageService.getCompanyInfo());
+      const updated = StorageService.getCompanyInfo();
+      setCompanyInfo(updated);
+      Analytics.init(updated.gaMeasurementId);
     });
 
     return () => {
       window.removeEventListener('hashchange', handleHash);
       unsubscribe();
     };
-  }, []);
+  }, [companyInfo.gaMeasurementId]);
 
   const navigateTo = (page: string, serviceId?: string) => {
     setActivePage(page);
@@ -89,6 +99,13 @@ export default function App() {
           companyInfo={companyInfo}
         />
       )}
+
+      {/* SEO Dynamic Head Synchronizer (Meta, Canonical, Social, Schema.org) */}
+      <SEOHead
+        pageKey={activePage}
+        serviceId={selectedServiceId}
+        companyInfo={companyInfo}
+      />
 
       {/* Main Page Content Router */}
       <main className="flex-1">
@@ -129,6 +146,7 @@ export default function App() {
           <AboutPage
             onRequestQuote={() => navigateTo('quote')}
             onExploreServices={() => navigateTo('services')}
+            onNavigate={(page) => navigateTo(page)}
             companyInfo={companyInfo}
           />
         )}
@@ -137,6 +155,7 @@ export default function App() {
           <ServicesPage
             initialServiceId={selectedServiceId}
             onRequestQuote={() => navigateTo('quote')}
+            onNavigate={(page, sId) => navigateTo(page, sId)}
           />
         )}
 
@@ -144,6 +163,7 @@ export default function App() {
           <GlobalNetworkPage
             onRequestQuote={() => navigateTo('quote')}
             onExploreServices={() => navigateTo('services')}
+            onNavigate={(page) => navigateTo(page)}
           />
         )}
 
@@ -154,6 +174,7 @@ export default function App() {
             }}
             onExploreServices={() => navigateTo('services')}
             onNavigateHome={() => navigateTo('home')}
+            onNavigate={(page) => navigateTo(page)}
           />
         )}
 
@@ -161,6 +182,7 @@ export default function App() {
           <ContactPage
             companyInfo={companyInfo}
             onRequestQuote={() => navigateTo('quote')}
+            onNavigate={(page) => navigateTo(page)}
           />
         )}
 
@@ -169,6 +191,11 @@ export default function App() {
             onBackToSite={() => navigateTo('home')}
             onRequestQuote={() => navigateTo('quote')}
           />
+        )}
+
+        {/* Custom Branded 404 Not Found Page */}
+        {!['home', 'about', 'services', 'network', 'quote', 'contact', 'admin'].includes(activePage) && (
+          <NotFoundPage onNavigate={(page) => navigateTo(page)} />
         )}
       </main>
 

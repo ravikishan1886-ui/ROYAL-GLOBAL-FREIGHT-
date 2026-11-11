@@ -11,14 +11,19 @@ import {
   CheckCircle2,
   ArrowRight,
   ShieldCheck,
-  Layers,
-  Image as ImageIcon
+  Image as ImageIcon,
+  ChevronDown,
+  HelpCircle,
+  ExternalLink
 } from 'lucide-react';
 import { Logo } from '../common/Logo';
+import { Breadcrumbs } from '../common/Breadcrumbs';
+import { LOGISTICS_FAQS } from '../../services/seo';
 
 interface ServicesPageProps {
   initialServiceId?: string;
   onRequestQuote: () => void;
+  onNavigate?: (page: string, serviceId?: string) => void;
 }
 
 interface ServiceItem {
@@ -30,14 +35,16 @@ interface ServiceItem {
   description: string;
   features: string[];
   icon: any;
+  relatedServiceIds: { id: string; name: string }[];
 }
 
-// Individual Interactive Service Card with Operational Photo Switcher
+// Individual Interactive Service Card with Operational Photo Switcher & Internal Cross-Links
 const ServiceCard: React.FC<{
   service: ServiceItem;
   index: number;
   onRequestQuote: () => void;
-}> = ({ service, index, onRequestQuote }) => {
+  onNavigate?: (page: string, serviceId?: string) => void;
+}> = ({ service, index, onRequestQuote, onNavigate }) => {
   const [activeImage, setActiveImage] = useState<string>(service.image);
   const Icon = service.icon;
   const isEven = index % 2 === 0;
@@ -54,23 +61,25 @@ const ServiceCard: React.FC<{
           <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden bg-[#071B36] shadow-inner group">
             <img
               src={activeImage}
-              alt={service.title}
+              alt={`${service.title} - International Freight Forwarding & Logistics`}
+              width={800}
+              height={533}
+              loading={index === 0 ? 'eager' : 'lazy'}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#071B36]/80 via-transparent to-transparent opacity-60" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#071B36]/80 via-transparent to-transparent opacity-60 pointer-events-none" />
             
             {/* Floating Number Badge */}
-            <div className="absolute top-3 left-3 px-3 py-1 bg-[#071B36]/90 backdrop-blur-md rounded-lg border border-[#C8A45D]/40 text-[#DFBF7A] font-mono text-xs font-bold">
+            <div className="absolute top-3 left-3 px-3 py-1 bg-[#071B36]/90 backdrop-blur-md rounded-lg border border-[#C8A45D]/40 text-[#DFBF7A] font-mono text-xs font-bold pointer-events-none">
               SERVICE 0{index + 1}
             </div>
 
             {/* Live Operational Indicator */}
-            <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] text-white bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/10">
+            <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] text-white bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/10 pointer-events-none">
               <span className="font-semibold text-[#DFBF7A] truncate font-['Montserrat',sans-serif]">
                 Active Fleet View
               </span>
-              <span className="text-slate-300 font-mono text-[10px]">High-Res Logistics</span>
+              <span className="text-slate-300 font-mono text-[10px]">Verified Logistics</span>
             </div>
           </div>
 
@@ -98,7 +107,10 @@ const ServiceCard: React.FC<{
                     >
                       <img
                         src={item.url}
-                        alt={item.label}
+                        alt={`${service.title} - ${item.label}`}
+                        width={200}
+                        height={133}
+                        loading="lazy"
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors" />
@@ -150,6 +162,35 @@ const ServiceCard: React.FC<{
                 ))}
               </div>
             </div>
+
+            {/* SEO Internal Cross-Linking: Related Services */}
+            {service.relatedServiceIds && service.relatedServiceIds.length > 0 && (
+              <div className="pt-2">
+                <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1.5">
+                  Frequently Combined With:
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {service.relatedServiceIds.map((rel, rIdx) => (
+                    <button
+                      key={rIdx}
+                      type="button"
+                      onClick={() => {
+                        const targetEl = document.getElementById(rel.id);
+                        if (targetEl) {
+                          targetEl.scrollIntoView({ behavior: 'smooth' });
+                        } else if (onNavigate) {
+                          onNavigate('services', rel.id);
+                        }
+                      }}
+                      className="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-slate-100 hover:bg-[#071B36] text-slate-700 hover:text-[#DFBF7A] text-xs font-medium transition cursor-pointer border border-slate-200"
+                    >
+                      <span>{rel.name}</span>
+                      <ExternalLink className="w-3 h-3 opacity-60" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Quote Action Button */}
@@ -172,8 +213,11 @@ const ServiceCard: React.FC<{
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({
   initialServiceId: _initialServiceId,
-  onRequestQuote
+  onRequestQuote,
+  onNavigate
 }) => {
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
   const detailedServices: ServiceItem[] = [
     {
       id: 'ocean-freight',
@@ -185,7 +229,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         { url: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1200&q=80', label: 'Open Ocean' },
         { url: 'https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=1200&q=80', label: 'Liner Berthing' }
       ],
-      description: 'Comprehensive international ocean freight forwarding connecting global industrial and consumer markets. We provide competitive port-to-port and door-to-door sea freight coordination across major global shipping alliances.',
+      description: 'Comprehensive international ocean freight forwarding connecting global industrial and consumer markets. We provide competitive port-to-port and door-to-door sea freight coordination across major global shipping alliances, serving key maritime routes including transpacific, transatlantic, and India-to-worldwide corridors.',
       features: [
         'Full Container Load (FCL) contracting and slot booking',
         'Less than Container Load (LCL) consolidation services',
@@ -194,7 +238,12 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         'Special equipment handling (Reefer, Open Top, Flat Rack containers)',
         'Vessel alliance schedule optimization and transshipment monitoring'
       ],
-      icon: Ship
+      icon: Ship,
+      relatedServiceIds: [
+        { id: 'customs-clearance', name: 'Customs Clearance' },
+        { id: 'multimodal-transportation', name: 'Multimodal Transport' },
+        { id: 'warehousing-distribution', name: 'Warehousing' }
+      ]
     },
     {
       id: 'air-freight',
@@ -215,7 +264,12 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         'Airport-to-airport and priority door-to-door delivery',
         'Dangerous goods (IATA-compliant) air freight coordination'
       ],
-      icon: Plane
+      icon: Plane,
+      relatedServiceIds: [
+        { id: 'customs-clearance', name: 'Customs Clearance' },
+        { id: 'road-freight', name: 'Road Haulage Drayage' },
+        { id: 'supply-chain-solutions', name: 'Supply Chain Solutions' }
+      ]
     },
     {
       id: 'road-freight',
@@ -236,7 +290,12 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         'Monitored carrier fleet network with scheduled transit updates',
         'Heavy-duty flatbed and specialized trailer allocations'
       ],
-      icon: Truck
+      icon: Truck,
+      relatedServiceIds: [
+        { id: 'ocean-freight', name: 'Ocean Freight' },
+        { id: 'multimodal-transportation', name: 'Intermodal Rail' },
+        { id: 'warehousing-distribution', name: 'Warehousing' }
+      ]
     },
     {
       id: 'customs-clearance',
@@ -247,7 +306,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         { url: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80', label: 'Audit Desk' },
         { url: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80', label: 'Port Customs' }
       ],
-      description: 'Navigating international customs legislation, tariff classifications, and trade protocols with expert documentation coordination to ensure timely cargo release.',
+      description: 'Navigating international customs legislation, tariff classifications, and trade protocols with expert documentation coordination to ensure timely cargo release at seaport and airport inspection gates.',
       features: [
         'Import documentation coordination and commercial invoice review',
         'Export documentation coordination and clearance filing',
@@ -256,7 +315,12 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         'Duty and tax assessment guidance under prevailing trade pacts',
         'Coordination with port health, agricultural, and quarantine authorities'
       ],
-      icon: FileCheck
+      icon: FileCheck,
+      relatedServiceIds: [
+        { id: 'ocean-freight', name: 'Ocean Freight' },
+        { id: 'air-freight', name: 'Air Freight' },
+        { id: 'warehousing-distribution', name: 'Bonded Warehousing' }
+      ]
     },
     {
       id: 'warehousing-distribution',
@@ -268,7 +332,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         { url: 'https://images.unsplash.com/photo-1524522173746-f628baad3644?auto=format&fit=crop&w=1200&q=80', label: 'Terminal Stacks' },
         { url: 'https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&w=1200&q=80', label: 'Bonded Yard' }
       ],
-      description: 'Strategic warehousing and fulfillment coordination designed to support regional buffer stocks, container de-stuffing, and synchronized cargo distribution.',
+      description: 'Strategic warehousing and fulfillment coordination designed to support regional buffer stocks, container de-stuffing, and synchronized cargo distribution near major trade arteries.',
       features: [
         'Storage coordination in secure bonded and general facilities',
         'Professional cargo handling, palletizing, shrink-wrapping, and sorting',
@@ -277,7 +341,12 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         'Container cross-docking and multi-vendor cargo consolidation',
         'Comprehensive security monitoring and facility standards'
       ],
-      icon: Warehouse
+      icon: Warehouse,
+      relatedServiceIds: [
+        { id: 'road-freight', name: 'Road Freight' },
+        { id: 'customs-clearance', name: 'Customs Clearance' },
+        { id: 'supply-chain-solutions', name: 'Supply Chain Solutions' }
+      ]
     },
     {
       id: 'project-cargo',
@@ -289,7 +358,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         { url: 'https://images.unsplash.com/photo-1565793298595-6a879b1d9492?auto=format&fit=crop&w=1200&q=80', label: 'Overhead Rigging' },
         { url: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=1200&q=80', label: 'Heavy Machinery' }
       ],
-      description: 'Bespoke logistics engineering for out-of-gauge industrial machinery, energy infrastructure, and non-containerized breakbulk consignments.',
+      description: 'Bespoke logistics engineering for out-of-gauge industrial machinery, energy infrastructure, mining plant modules, and non-containerized breakbulk consignments.',
       features: [
         'Heavy cargo coordination and multi-axle modular transporter planning',
         'Oversized cargo transportation planning and route feasibility surveys',
@@ -298,7 +367,12 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         'Civil engineering road permits and bridge weight compliance',
         'On-site technical supervision at loading and discharge ports'
       ],
-      icon: Cog
+      icon: Cog,
+      relatedServiceIds: [
+        { id: 'ocean-freight', name: 'Breakbulk Ocean Liner' },
+        { id: 'multimodal-transportation', name: 'Multimodal Transport' },
+        { id: 'customs-clearance', name: 'Heavy Equipment Clearance' }
+      ]
     },
     {
       id: 'multimodal-transportation',
@@ -310,7 +384,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         { url: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1200&q=80', label: 'Highway Drayage' },
         { url: 'https://images.unsplash.com/photo-1473445730015-841f29a9490b?auto=format&fit=crop&w=1200&q=80', label: 'Rail Terminal' }
       ],
-      description: 'Seamless intermodal combinations harmonizing sea, air, rail, and road to optimize transit speed against logistics expenditures.',
+      description: 'Seamless intermodal combinations harmonizing sea, air, rail, and road to optimize transit speed against logistics expenditures, bridging maritime gateways with continental manufacturing hubs.',
       features: [
         'Sea and road integrated transportation coordination',
         'Air and road hybrid logistics coordination',
@@ -319,7 +393,12 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         'Single freight forwarding workflow across diverse modes',
         'Contingency routing during port or airport bottlenecks'
       ],
-      icon: Boxes
+      icon: Boxes,
+      relatedServiceIds: [
+        { id: 'ocean-freight', name: 'Ocean Freight' },
+        { id: 'road-freight', name: 'Road Haulage' },
+        { id: 'project-cargo', name: 'Project Cargo' }
+      ]
     },
     {
       id: 'supply-chain-solutions',
@@ -330,7 +409,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         { url: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1200&q=80', label: 'Global Trade' },
         { url: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200&q=80', label: 'Liner Networks' }
       ],
-      description: 'Holistic cargo flow coordination and strategic logistics planning designed to enhance visibility, mitigate trade disruption, and lower total landed cost.',
+      description: 'Holistic cargo flow coordination and strategic logistics planning designed to enhance visibility, mitigate trade disruption, and lower total landed cost for enterprise shippers.',
       features: [
         'End-to-end freight coordination across vendors and carriers',
         'Shipment visibility and structured milestone reporting',
@@ -339,7 +418,12 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         'Trade lane risk evaluation and alternative route modeling',
         'Commercial data analytics and logistics performance review'
       ],
-      icon: Network
+      icon: Network,
+      relatedServiceIds: [
+        { id: 'ocean-freight', name: 'Ocean Freight' },
+        { id: 'air-freight', name: 'Air Freight' },
+        { id: 'warehousing-distribution', name: 'Warehousing' }
+      ]
     }
   ];
 
@@ -364,24 +448,83 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
             Commercial Freight Capabilities
           </div>
           <h1 className="font-['Montserrat',sans-serif] text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight uppercase">
-            ROYAL GLOBAL FREIGHT SERVICES
+            INTERNATIONAL FREIGHT FORWARDING SERVICES
           </h1>
           <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-['Inter',sans-serif]">
-            Specialized international freight forwarding solutions designed to transport your cargo securely across sea, air, road, and multimodal corridors.
+            Specialized global freight forwarding solutions designed to transport commercial cargo securely across ocean vessels, international air routes, overland trucking, and multimodal corridors.
           </p>
         </div>
       </section>
 
+      {/* Breadcrumb Navigation */}
+      <div className="bg-white border-b border-slate-200">
+        <Breadcrumbs
+          items={[
+            { name: 'Home', path: '/', onClick: () => onNavigate && onNavigate('home') },
+            { name: 'Services', path: '/services' }
+          ]}
+        />
+      </div>
+
       {/* Services List Details with Interactive Multi-Angle Gallery */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-8 space-y-16">
+      <section className="py-16 max-w-7xl mx-auto px-4 sm:px-8 space-y-16">
         {detailedServices.map((service, index) => (
           <ServiceCard
             key={service.id}
             service={service}
             index={index}
             onRequestQuote={onRequestQuote}
+            onNavigate={onNavigate}
           />
         ))}
+      </section>
+
+      {/* Frequently Asked Questions (FAQ Section with Schema.org JSON-LD integration) */}
+      <section className="py-20 bg-white border-y border-slate-200">
+        <div className="max-w-5xl mx-auto px-4 sm:px-8 space-y-10">
+          <div className="text-center space-y-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#071B36]/10 text-[#071B36] text-xs font-bold uppercase tracking-widest border border-[#C8A45D]/40">
+              <HelpCircle className="w-3.5 h-3.5 text-[#C8A45D]" />
+              Industry Insights
+            </div>
+            <h2 className="font-['Montserrat',sans-serif] text-2xl sm:text-3xl font-extrabold text-[#071B36] uppercase tracking-tight">
+              FREIGHT FORWARDING &amp; LOGISTICS FAQ
+            </h2>
+            <p className="text-sm text-slate-600 font-['Inter',sans-serif] max-w-2xl mx-auto">
+              Clear answers to the most common questions regarding international shipping, container booking, customs compliance, and project cargo execution.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {LOGISTICS_FAQS.map((faq, fIdx) => {
+              const isOpen = openFaqIndex === fIdx;
+              return (
+                <div
+                  key={fIdx}
+                  className="rounded-2xl border border-slate-200 overflow-hidden transition-colors bg-[#F4F6F9] hover:border-[#C8A45D]"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaqIndex(isOpen ? null : fIdx)}
+                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-['Montserrat',sans-serif] font-bold text-sm sm:text-base text-[#071B36] cursor-pointer"
+                  >
+                    <span>{faq.question}</span>
+                    <ChevronDown
+                      className={`w-5 h-5 text-[#C8A45D] shrink-0 transition-transform duration-300 ${
+                        isOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  {isOpen && (
+                    <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 font-['Inter',sans-serif] leading-relaxed border-t border-slate-200/60 bg-white">
+                      {faq.answer}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
       {/* Bottom CTA Banner */}
@@ -391,7 +534,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
             Need a Customized Multimodal Shipping Strategy?
           </h3>
           <p className="text-sm text-slate-300 max-w-xl mx-auto">
-            Our experienced freight coordination team is on standby to evaluate your cargo specifications, route options, and budget targets.
+            Our experienced freight coordination team is on standby to evaluate your cargo specifications, route options, and budget targets across global trade lanes.
           </p>
           <div className="pt-2">
             <button
