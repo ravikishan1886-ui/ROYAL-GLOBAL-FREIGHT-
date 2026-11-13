@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import {
   SEO_PAGES,
   CANONICAL_ORIGIN,
+  SITE_DISPLAY_NAME,
   generateOrganizationSchema,
   generateWebSiteSchema,
   generateBreadcrumbSchema,
@@ -47,13 +48,14 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
     };
 
     // 2. Standard Meta Tags
+    setMetaTag('name', 'application-name', SITE_DISPLAY_NAME);
     setMetaTag('name', 'description', config.description);
     setMetaTag('name', 'keywords', config.keywords.join(', '));
-    setMetaTag('name', 'author', companyInfo.companyName);
+    setMetaTag('name', 'author', SITE_DISPLAY_NAME);
     setMetaTag('name', 'robots', pageKey === 'admin' ? 'noindex, nofollow' : 'index, follow');
 
     // 3. Open Graph Tags
-    setMetaTag('property', 'og:site_name', companyInfo.companyName);
+    setMetaTag('property', 'og:site_name', SITE_DISPLAY_NAME);
     setMetaTag('property', 'og:title', config.title);
     setMetaTag('property', 'og:description', config.description);
     setMetaTag('property', 'og:url', canonicalUrl);

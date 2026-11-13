@@ -13,6 +13,7 @@ export interface SEOConfig {
 }
 
 export const CANONICAL_ORIGIN = 'https://royalglobalfreight.com';
+export const SITE_DISPLAY_NAME = 'Royal Global Freight Pvt Ltd.';
 
 export const OFFICIAL_LOGO_ABSOLUTE_URL = `${CANONICAL_ORIGIN}/assets/aistudio/file_000000002b3c8208aa2c073557e13cb3_eeff9ba8.png`;
 
@@ -40,8 +41,8 @@ export const TARGET_KEYWORDS = [
 
 export const SEO_PAGES: Record<string, SEOConfig> = {
   home: {
-    title: 'Royal Global Freight | International Freight Forwarding & Logistics',
-    description: 'Royal Global Freight offers international freight forwarding, ocean freight, air freight, road transportation and global logistics coordination.',
+    title: 'Royal Global Freight Pvt Ltd. | International Freight Forwarding & Logistics',
+    description: 'Royal Global Freight Pvt Ltd. offers international freight forwarding, ocean freight, air freight, road transportation and global logistics coordination.',
     canonicalPath: '/',
     h1: 'International Freight Forwarding & Global Logistics Solutions',
     keywords: [
@@ -57,8 +58,8 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
     breadcrumbs: [{ name: 'Home', path: '/' }]
   },
   about: {
-    title: 'About Royal Global Freight | Global Logistics Company',
-    description: 'Discover Royal Global Freight, a premier global freight forwarder connecting international markets with reliable sea, air, and multimodal logistics solutions.',
+    title: 'About Royal Global Freight Pvt Ltd. | Global Logistics Company',
+    description: 'Discover Royal Global Freight Pvt Ltd., a premier global freight forwarder connecting international markets with reliable sea, air, and multimodal logistics solutions.',
     canonicalPath: '/about',
     h1: 'About Royal Global Freight | Global Logistics Company',
     keywords: [
@@ -75,7 +76,7 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
     ]
   },
   services: {
-    title: 'International Freight Forwarding Services | Royal Global Freight',
+    title: 'International Freight Forwarding Services | Royal Global Freight Pvt Ltd.',
     description: 'Explore our end-to-end international freight forwarding services, including ocean container shipping, air cargo, road freight haulage, and customs clearance.',
     canonicalPath: '/services',
     h1: 'International Freight Forwarding Services',
@@ -95,7 +96,7 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
     ]
   },
   'ocean-freight': {
-    title: 'Ocean Freight Services | Royal Global Freight',
+    title: 'Ocean Freight Services | Royal Global Freight Pvt Ltd.',
     description: 'Full container load (FCL) and less than container load (LCL) international ocean shipping services connecting major global seaports and maritime trade lanes.',
     canonicalPath: '/services/ocean-freight',
     h1: 'Ocean Freight Services & Container Shipping Solutions',
@@ -117,7 +118,7 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
     ]
   },
   'air-freight': {
-    title: 'International Air Freight Services | Royal Global Freight',
+    title: 'International Air Freight Services | Royal Global Freight Pvt Ltd.',
     description: 'Expedited international air freight services, scheduled airline allocations, and air cargo charter solutions for time-critical global consignments.',
     canonicalPath: '/services/air-freight',
     h1: 'International Air Freight Services & Cargo Logistics',
@@ -138,7 +139,7 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
     ]
   },
   'road-freight': {
-    title: 'Road Freight Services | Royal Global Freight',
+    title: 'Road Freight Services | Royal Global Freight Pvt Ltd.',
     description: 'Road Freight Services by Royal Global Freight. Reliable road transportation, cross-border haulage coordination, and inland container drayage logistics.',
     canonicalPath: '/services/road-freight',
     h1: 'Road Freight Services & Inland Transportation Haulage',
@@ -159,7 +160,7 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
     ]
   },
   'customs-clearance': {
-    title: 'Customs Clearance Support | Royal Global Freight',
+    title: 'Customs Clearance Support | Royal Global Freight Pvt Ltd.',
     description: 'Customs Clearance Support by Royal Global Freight. Expert import and export customs documentation review, HS tariff classification, and port clearance support.',
     canonicalPath: '/services/customs-clearance',
     h1: 'Customs Clearance Support & Trade Compliance Brokerage',
@@ -180,7 +181,7 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
     ]
   },
   'warehousing-distribution': {
-    title: 'Warehousing & Distribution Services | Royal Global Freight',
+    title: 'Warehousing & Distribution Services | Royal Global Freight Pvt Ltd.',
     description: 'Warehousing and distribution support near major international transport corridors. Bonded storage, cargo palletizing, and cross-dock dispatch.',
     canonicalPath: '/services/warehousing-distribution',
     h1: 'Warehousing & Strategic Distribution Services',
@@ -200,7 +201,7 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
     ]
   },
   'project-cargo': {
-    title: 'Project Cargo Logistics | Royal Global Freight',
+    title: 'Project Cargo Logistics | Royal Global Freight Pvt Ltd.',
     description: 'Specialized Project Cargo Logistics by Royal Global Freight. Heavy-lift engineering, oversized breakbulk shipping, and modular hydraulic platform routing.',
     canonicalPath: '/services/project-cargo',
     h1: 'Specialized Project Cargo & Heavy Lift Logistics',
@@ -221,7 +222,7 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
     ]
   },
   'multimodal-transportation': {
-    title: 'Multimodal Transportation | Royal Global Freight',
+    title: 'Multimodal Transportation | Royal Global Freight Pvt Ltd.',
     description: 'Multimodal Transportation Services combining sea, rail, road, and air into an integrated, cost-efficient international logistics pipeline.',
     canonicalPath: '/services/multimodal-transportation',
     h1: 'Multimodal Transportation & Intermodal Freight Services',
@@ -241,7 +242,7 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
     ]
   },
   'supply-chain-solutions': {
-    title: 'Supply Chain Solutions | Royal Global Freight',
+    title: 'Supply Chain Solutions | Royal Global Freight Pvt Ltd.',
     description: 'Holistic international supply chain management, PO milestone tracking, carrier contract optimization, and trade lane risk modeling.',
     canonicalPath: '/services/supply-chain-solutions',
     h1: 'Integrated Supply Chain Solutions & Freight Architecture',
@@ -261,7 +262,7 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
     ]
   },
   network: {
-    title: 'Global Shipping Network | Royal Global Freight',
+    title: 'Global Shipping Network | Royal Global Freight Pvt Ltd.',
     description: 'Global Shipping Network by Royal Global Freight. Trans-Pacific, Asia-Europe, Transatlantic, Middle East, and Latin American commercial freight corridors.',
     canonicalPath: '/network',
     h1: 'Global Shipping Network & International Trade Corridors',
@@ -281,7 +282,7 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
     ]
   },
   contact: {
-    title: 'Contact Royal Global Freight | Freight & Logistics Enquiries',
+    title: 'Contact Royal Global Freight Pvt Ltd. | Freight & Logistics Enquiries',
     description: 'Contact Royal Global Freight. Reach our dedicated international freight forwarding desks for shipping rates, carrier bookings, and logistics consultation.',
     canonicalPath: '/contact',
     h1: 'Contact Royal Global Freight & Priority Trade Desks',
@@ -299,7 +300,7 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
     ]
   },
   quote: {
-    title: 'Request an International Freight Quote | Royal Global Freight',
+    title: 'Request an International Freight Quote | Royal Global Freight Pvt Ltd.',
     description: 'Request an International Freight Quote from Royal Global Freight. Competitive rates for FCL/LCL ocean shipping, air cargo, and multimodal freight solutions.',
     canonicalPath: '/quote',
     h1: 'Request an International Freight Quote',
@@ -318,7 +319,7 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
     ]
   },
   'not-found': {
-    title: 'Page Not Found (404) | Royal Global Freight',
+    title: 'Page Not Found (404) | Royal Global Freight Pvt Ltd.',
     description: 'The requested freight forwarding page could not be found. Navigate back to Royal Global Freight home, our services, or global shipping network.',
     canonicalPath: '/404',
     h1: '404 - Page Not Found',
@@ -329,7 +330,7 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
     ]
   },
   'privacy-policy': {
-    title: 'Privacy Policy | Royal Global Freight',
+    title: 'Privacy Policy | Royal Global Freight Pvt Ltd.',
     description: 'Privacy Policy of Royal Global Freight. Learn how we handle, store, and protect commercial shipping documentation and client data.',
     canonicalPath: '/privacy-policy',
     h1: 'Privacy & Data Protection Policy',
@@ -346,7 +347,7 @@ export const SEO_PAGES: Record<string, SEOConfig> = {
     ]
   },
   'terms-and-conditions': {
-    title: 'Terms & Conditions | Royal Global Freight',
+    title: 'Terms & Conditions | Royal Global Freight Pvt Ltd.',
     description: 'Standard Terms & Conditions of Freight Service for Royal Global Freight. Detailed forwarding, carriage coordination, and liability conditions.',
     canonicalPath: '/terms-and-conditions',
     h1: 'Standard Terms & Conditions of Freight Service',
@@ -372,12 +373,13 @@ export function generateOrganizationSchema(company: CompanyInfo) {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': `${CANONICAL_ORIGIN}/#organization`,
-    name: company.companyName,
-    alternateName: 'RGF',
-    url: CANONICAL_ORIGIN,
+    name: SITE_DISPLAY_NAME,
+    legalName: SITE_DISPLAY_NAME,
+    alternateName: ['Royal Global Freight', 'RGF'],
+    url: `${CANONICAL_ORIGIN}/`,
     logo: OFFICIAL_LOGO_ABSOLUTE_URL,
     image: OFFICIAL_LOGO_ABSOLUTE_URL,
-    description: 'Royal Global Freight is a premium international freight forwarding and global logistics coordination enterprise.',
+    description: 'Royal Global Freight Pvt Ltd. is a premium international freight forwarding and global logistics coordination enterprise.',
     slogan: company.tagline,
     telephone: company.phone,
     email: company.email,
@@ -412,14 +414,14 @@ export function generateOrganizationSchema(company: CompanyInfo) {
 /**
  * Generates Schema.org WebSite JSON-LD
  */
-export function generateWebSiteSchema(company: CompanyInfo) {
+export function generateWebSiteSchema(_company: CompanyInfo) {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     '@id': `${CANONICAL_ORIGIN}/#website`,
-    url: CANONICAL_ORIGIN,
-    name: company.companyName,
-    alternateName: 'Royal Global Freight (RGF)',
+    url: `${CANONICAL_ORIGIN}/`,
+    name: SITE_DISPLAY_NAME,
+    alternateName: ['Royal Global Freight', 'RGF'],
     description: 'International Freight Forwarding, Global Shipping and Logistics Solutions.',
     publisher: {
       '@id': `${CANONICAL_ORIGIN}/#organization`
