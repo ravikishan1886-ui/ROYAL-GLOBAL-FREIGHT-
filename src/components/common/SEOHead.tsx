@@ -52,7 +52,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
     setMetaTag('name', 'description', config.description);
     setMetaTag('name', 'keywords', config.keywords.join(', '));
     setMetaTag('name', 'author', SITE_DISPLAY_NAME);
-    setMetaTag('name', 'robots', pageKey === 'admin' ? 'noindex, nofollow' : 'index, follow');
+    setMetaTag('name', 'robots', 'index, follow');
 
     // 3. Open Graph Tags
     setMetaTag('property', 'og:site_name', SITE_DISPLAY_NAME);

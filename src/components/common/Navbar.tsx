@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone, Shield, Search, ArrowRight } from 'lucide-react';
+import { Menu, X, Phone, Search, ArrowRight } from 'lucide-react';
 import { Logo } from './Logo';
 import { CompanyInfo } from '../../types';
 
@@ -66,17 +66,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Search className="w-3 h-3" />
               <span>Track Shipment</span>
-            </button>
-            <span className="text-slate-600">|</span>
-            <button
-              onClick={() => handleNavClick('admin')}
-              className={`flex items-center gap-1 transition cursor-pointer ${
-                activePage === 'admin' ? 'text-[#C8A45D] font-bold' : 'text-slate-400 hover:text-[#C8A45D]'
-              }`}
-              title="Staff & Operations Portal"
-            >
-              <Shield className="w-3 h-3 text-[#C8A45D]" />
-              <span className="text-[10px] uppercase tracking-wider">Admin Portal</span>
             </button>
           </div>
         </div>
@@ -213,13 +202,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             <p>{companyInfo.address}</p>
             <div className="flex items-center justify-between pt-2">
               <span className="font-mono">{companyInfo.phone}</span>
-              <button
-                onClick={() => handleNavClick('admin')}
-                className="text-[#C8A45D] hover:underline flex items-center gap-1 font-semibold"
-              >
-                <Shield className="w-3.5 h-3.5" />
-                <span>Admin Login</span>
-              </button>
             </div>
           </div>
         </div>

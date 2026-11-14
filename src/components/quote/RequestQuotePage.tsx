@@ -169,7 +169,7 @@ export const RequestQuotePage: React.FC<RequestQuotePageProps> = ({
         documentName: uploadedFileName || undefined
       };
 
-      // Persist to store (synchronized with Admin Dashboard)
+      // Persist enquiry to local store
       StorageService.addQuote(newEnquiry);
 
       // Trigger privacy-safe conversion event in GA4

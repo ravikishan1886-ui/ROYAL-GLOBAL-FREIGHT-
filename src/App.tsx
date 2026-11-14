@@ -26,7 +26,6 @@ const ServicesPage = lazy(() => import('./components/services/ServicesPage').the
 const GlobalNetworkPage = lazy(() => import('./components/network/GlobalNetworkPage').then(m => ({ default: m.GlobalNetworkPage })));
 const RequestQuotePage = lazy(() => import('./components/quote/RequestQuotePage').then(m => ({ default: m.RequestQuotePage })));
 const ContactPage = lazy(() => import('./components/contact/ContactPage').then(m => ({ default: m.ContactPage })));
-const AdminDashboard = lazy(() => import('./components/admin/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
 const NotFoundPage = lazy(() => import('./components/common/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 const PolicyPage = lazy(() => import('./components/common/PolicyPage').then(m => ({ default: m.PolicyPage })));
 
@@ -54,7 +53,7 @@ export default function App() {
     handleHash();
     window.addEventListener('hashchange', handleHash);
 
-    // Subscribe to store updates (e.g. if admin changes company info or new quotes come in)
+    // Subscribe to store updates
     const unsubscribe = subscribeToStore(() => {
       const updated = StorageService.getCompanyInfo();
       setCompanyInfo(updated);
@@ -92,16 +91,14 @@ export default function App() {
         </div>
       )}
 
-      {/* Main Navbar (Hidden only if in full Admin view for cleaner focus) */}
-      {activePage !== 'admin' && (
-        <Navbar
-          activePage={activePage}
-          onNavigate={(page) => navigateTo(page)}
-          onRequestQuote={() => navigateTo('quote')}
-          onOpenTracking={() => setIsTrackingOpen(true)}
-          companyInfo={companyInfo}
-        />
-      )}
+      {/* Main Navbar */}
+      <Navbar
+        activePage={activePage}
+        onNavigate={(page) => navigateTo(page)}
+        onRequestQuote={() => navigateTo('quote')}
+        onOpenTracking={() => setIsTrackingOpen(true)}
+        companyInfo={companyInfo}
+      />
 
       {/* SEO Dynamic Head Synchronizer (Meta, Canonical, Social, Schema.org) */}
       <SEOHead
@@ -197,13 +194,6 @@ export default function App() {
             />
           )}
 
-          {activePage === 'admin' && (
-            <AdminDashboard
-              onBackToSite={() => navigateTo('home')}
-              onRequestQuote={() => navigateTo('quote')}
-            />
-          )}
-
           {activePage === 'privacy-policy' && (
             <PolicyPage
               type="privacy"
@@ -221,22 +211,20 @@ export default function App() {
           )}
 
           {/* Custom Branded 404 Not Found Page */}
-          {!['home', 'about', 'services', 'network', 'quote', 'contact', 'admin', 'privacy-policy', 'terms-and-conditions'].includes(activePage) && (
+          {!['home', 'about', 'services', 'network', 'quote', 'contact', 'privacy-policy', 'terms-and-conditions'].includes(activePage) && (
             <NotFoundPage onNavigate={(page) => navigateTo(page)} />
           )}
         </Suspense>
       </main>
 
-      {/* Main Footer (Hidden in Admin for clear workspace) */}
-      {activePage !== 'admin' && (
-        <Footer
-          onNavigate={(page) => navigateTo(page)}
-          onRequestQuote={() => navigateTo('quote')}
-          onOpenPrivacy={() => setPolicyModalType('privacy')}
-          onOpenTerms={() => setPolicyModalType('terms')}
-          companyInfo={companyInfo}
-        />
-      )}
+      {/* Main Footer */}
+      <Footer
+        onNavigate={(page) => navigateTo(page)}
+        onRequestQuote={() => navigateTo('quote')}
+        onOpenPrivacy={() => setPolicyModalType('privacy')}
+        onOpenTerms={() => setPolicyModalType('terms')}
+        companyInfo={companyInfo}
+      />
 
       {/* Global Tracking Modal */}
       <TrackingModal

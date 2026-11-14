@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Clock, Shield, Globe, ExternalLink, ArrowRight } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Globe, ExternalLink, ArrowRight } from 'lucide-react';
 import { Logo } from './Logo';
 import { CompanyInfo } from '../../types';
 
@@ -168,7 +168,7 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
         </div>
 
-        {/* Bottom Legal, Privacy & Admin Row */}
+        {/* Bottom Legal & Privacy Row */}
         <div className="mt-14 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div className="flex flex-wrap items-center gap-2">
             <span>© {currentYear} Royal Global Freight (RGF). All rights reserved.</span>
@@ -189,14 +189,6 @@ export const Footer: React.FC<FooterProps> = ({
               className="hover:text-[#DFBF7A] transition cursor-pointer"
             >
               Terms & Conditions
-            </button>
-            <span>·</span>
-            <button
-              onClick={() => onNavigate('admin')}
-              className="text-[#DFBF7A] hover:underline flex items-center gap-1 font-semibold cursor-pointer"
-            >
-              <Shield className="w-3 h-3 text-[#C8A45D]" />
-              <span>Admin Portal</span>
             </button>
           </div>
         </div>

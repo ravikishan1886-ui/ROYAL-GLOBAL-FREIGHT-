@@ -11,8 +11,7 @@ const STORAGE_KEYS = {
   QUOTES: 'rgf_quote_enquiries',
   CONTACTS: 'rgf_contact_enquiries',
   COMPANY: 'rgf_company_info',
-  TRACKING: 'rgf_shipment_tracking',
-  ADMIN_AUTH: 'rgf_admin_auth_token'
+  TRACKING: 'rgf_shipment_tracking'
 };
 
 export const INITIAL_COMPANY_INFO: CompanyInfo = {
@@ -442,27 +441,5 @@ export const StorageService = {
       updated = [record, ...list];
     }
     writeStorage(STORAGE_KEYS.TRACKING, updated);
-  },
-
-  // Admin Authentication Session
-  isAdminAuthenticated(): boolean {
-    try {
-      return localStorage.getItem(STORAGE_KEYS.ADMIN_AUTH) === 'authenticated_rgf_admin';
-    } catch {
-      return false;
-    }
-  },
-
-  setAdminAuthenticated(auth: boolean): void {
-    try {
-      if (auth) {
-        localStorage.setItem(STORAGE_KEYS.ADMIN_AUTH, 'authenticated_rgf_admin');
-      } else {
-        localStorage.removeItem(STORAGE_KEYS.ADMIN_AUTH);
-      }
-    } catch (e) {
-      console.warn('Storage auth set error', e);
-    }
-    notifyListeners();
   }
 };
